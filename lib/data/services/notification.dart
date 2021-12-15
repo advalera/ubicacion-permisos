@@ -6,13 +6,26 @@ class NotificationService implements NotificationInterface {
 
   // TO DO  
   // Establece la configuración inicial e inicializa el pluggin FlutterLocalNotificationsPlugin
-  // @override
-  // Future<void> initialize() async {}
+  @override
+  Future<void> initialize() async {
+    const AndroidInitializationSettings initializationSettingsAndroid = AndroidInitializationSettings('app_icon');
+    const InitializationSettings initializationSettings = InitializationSettings(android: initializationSettingsAndroid);
+    await _plugin.initialize(initializationSettings);
+  }
 
   // TO DO
   // Crea el canal para notificaciones con una importancia y prioridad maxima
-  // @override
-  // NotificationDetails createChannel()
+  @override
+  NotificationDetails createChannel({required String id, required String name, required String description}) {
+    final AndroidNotificationDetails androidPlatformChannelSpecifics = AndroidNotificationDetails(
+      id,
+      name,
+      channelDescription: description,
+      importance: Importance.max,
+      priority: Priority.max,
+    );
+    return NotificationDetails(android: androidPlatformChannelSpecifics);
+  }
 
   @override
   Future<void> showNotification(

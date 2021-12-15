@@ -6,12 +6,18 @@ class NotificationManager {
 
   // TODO
   //Inicializa el pluggin de notificaciones
-  // initialize() async {  }
+  initialize() async { 
+    await _service.initialize();
+   }
 
 
   // TODO
   //Crea el canal para notificaciones
-  // NotificationDetails  createChannel();
+  NotificationDetails createChannel(
+    {required String id, required String name, required String description}
+  ) {
+    return _service.createChannel(id: id, name: name, description: description);
+  }
   
 
   void showNotification(
